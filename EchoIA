@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Vocal IA-Tech</title>
+
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+  padding-top: 50px;
+  background: white;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#transcript {
+  margin-top: 20px;
+  font-size: 20px;
+  color: black;
+}
+
+#reply {
+  margin-top: 20px;
+  font-size: 18px;
+  color: green;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>🎤 Parler à l’IA</h2>
+
+<button id="startBtn">Cliquez pour parler</button>
+
+<p id="transcript">Votre texte apparaîtra ici</p>
+<p id="reply"></p>
+
+<script>
+const startBtn = document.getElementById('startBtn');
+const transcript = document.getElementById('transcript');
+const replyBox = document.getElementById('reply');
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (!SpeechRecognition) {
+  alert("Reconnaissance vocale non supportée.");
+}
+
+const recognition = new SpeechRecognition();
+recognition.lang = 'fr-FR';
+recognition.interimResults = false;
+
+// 🎤 Démarrer voix
+startBtn.onclick = () => {
+  recognition.start();
+};
+
+// 🧠 Quand tu parles
+recognition.onresult = async (event) => {
+  const text = event.results[0][0].transcript;
+  transcript.innerText = "🗣️ Vous : " + text;
+
+  // 🔥 envoyer à ton API IA
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: text })
+  });
+
+  const data = await res.json();
+
+  const reply = data.reply || "Erreur IA";
+
+  replyBox.innerText = "🤖 IA : " + reply;
+
+  // 🔊 parler la réponse
+  const speech = new SpeechSynthesisUtterance(reply);
+  speech.lang = "fr-FR";
+  speechSynthesis.speak(speech);
+};
+</script>
+
+</body>
+</html>
