@@ -1,3 +1,5 @@
+import db from "./db.json" assert { type: "json" };
+
 export async function POST(req) {
   try {
     const { message } = await req.json();
@@ -6,6 +8,20 @@ export async function POST(req) {
       return Response.json({ error: "Message manquant" }, { status: 400 });
     }
 
+    const msg = message.toLowerCase();
+
+    // 🧠 1. CHECK DANS db.json AVANT OPENAI
+    for (let item of db) {
+      for (let key of item.keys) {
+        if (msg.includes(key.toLowerCase())) {
+          return Response.json({
+            reply: item.answer
+          });
+        }
+      }
+    }
+
+    // 🤖 2. SI PAS TROUVÉ → OPENAI
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -33,4 +49,4 @@ export async function POST(req) {
       { status: 500 }
     );
   }
-        }
+                           }
