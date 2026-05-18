@@ -5,48 +5,57 @@ export async function POST(req) {
     const { message } = await req.json();
 
     if (!message) {
-      return Response.json({ error: "Message manquant" }, { status: 400 });
+      return Response.json({ reply: "Message manquant" });
     }
 
-    const msg = message.toLowerCase();
+    const msg = message.toLowerCase().trim();
 
-    // 🧠 1. CHECK DANS db.json AVANT OPENAI
+    // 🧠 1. RECHERCHE EXACTE / PARTIELLE
     for (let item of db) {
       for (let key of item.keys) {
-        if (msg.includes(key.toLowerCase())) {
-          return Response.json({
-            reply: item.answer
-          });
+        const k = key.toLowerCase();
+
+        if (msg.includes(k) || k.includes(msg)) {
+          return Response.json({ reply: item.answer });
         }
       }
     }
 
-    // 🤖 2. SI PAS TROUVÉ → OPENAI
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: "Tu es une IA utile." },
-          { role: "user", content: message },
-        ],
-      }),
-    });
+    // 🧠 2. MOTS GÉNÉRAUX (fallback intelligent)
+    if (msg.includes("qui") || msg.includes("quoi") || msg.includes("comment")) {
+      return Response.json({
+        reply: "🤖 Peux-tu préciser ta question ? Je vais t’aider."
+      });
+    }
 
-    const data = await response.json();
+    if (msg.includes("bonjour") || msg.includes("salut")) {
+      return Response.json({
+        reply: "👋 Bonjour ! Comment puis-je t’aider ?"
+      });
+    }
+
+    if (msg.includes("merci")) {
+      return Response.json({
+        reply: "😊 Avec plaisir !"
+      });
+    }
+
+    // 🧠 3. FALLBACK INTELLIGENT
+    const fallback = [
+      "🤔 Je ne suis pas sûr de comprendre, peux-tu reformuler ?",
+      "Je n’ai pas encore appris ça 📚",
+      "Peux-tu préciser ta question ? 🤖",
+      "Je vais m’améliorer avec le temps 👍"
+    ];
 
     return Response.json({
-      reply: data.choices?.[0]?.message?.content || "Erreur IA",
+      reply: fallback[Math.floor(Math.random() * fallback.length)]
     });
 
   } catch (error) {
-    return Response.json(
-      { error: "Erreur serveur", details: error.message },
-      { status: 500 }
-    );
+    return Response.json({
+      reply: "Erreur serveur ❌",
+      details: error.message
+    });
   }
-                           }
+}
