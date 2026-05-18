@@ -1,0 +1,122 @@
+[
+  {
+    "keys": ["bonjour", "salut", "hello", "coucou"],
+    "answer": "Bonjour 👋 je suis ton assistant IA autonome."
+  },
+  {
+    "keys": ["merci", "merci beaucoup"],
+    "answer": "Avec plaisir 😊"
+  },
+  {
+    "keys": ["au revoir", "bye"],
+    "answer": "Au revoir 👋 à bientôt !"
+  },
+  {
+    "keys": ["ia", "intelligence artificielle"],
+    "answer": "L’IA 🤖 est une technologie qui imite l’intelligence humaine."
+  },
+
+  // 🌍 GEOGRAPHIE
+  {
+    "keys": ["france", "paris"],
+    "answer": "Paris est la capitale de la France 🇫🇷"
+  },
+  {
+    "keys": ["senegal", "dakar"],
+    "answer": "Dakar est la capitale du Sénégal 🇸🇳"
+  },
+  {
+    "keys": ["afrique"],
+    "answer": "L’Afrique est un continent riche en cultures et en diversité 🌍"
+  },
+  {
+    "keys": ["terre"],
+    "answer": "La Terre est la troisième planète du système solaire 🌍"
+  },
+  {
+    "keys": ["soleil"],
+    "answer": "Le Soleil est une étoile qui éclaire notre système solaire ☀️"
+  },
+
+  // 📚 LITTERATURE
+  {
+    "keys": ["litterature", "littérature"],
+    "answer": "La littérature est l’art d’exprimer des idées à travers les mots ✍️"
+  },
+  {
+    "keys": ["poesie", "poésie"],
+    "answer": "La poésie est une forme d’écriture qui exprime les émotions avec beauté 🌸"
+  },
+  {
+    "keys": ["roman"],
+    "answer": "Un roman est une histoire longue écrite en prose 📖"
+  },
+  {
+    "keys": ["fable"],
+    "answer": "Une fable est une courte histoire avec une morale (ex: La Fontaine) 🦊"
+  },
+  {
+    "keys": ["theatre", "théâtre"],
+    "answer": "Le théâtre est un genre littéraire fait pour être joué sur scène 🎭"
+  },
+  {
+    "keys": ["victor hugo"],
+    "answer": "Victor Hugo est un grand écrivain français (Les Misérables) 📚"
+  },
+  {
+    "keys": ["moliere", "molière"],
+    "answer": "Molière est un célèbre dramaturge français 🎭"
+  },
+
+  // 🔬 SCIENCES
+  {
+    "keys": ["science"],
+    "answer": "La science permet de comprendre le monde grâce à l’observation 🔬"
+  },
+  {
+    "keys": ["physique"],
+    "answer": "La physique étudie la matière et l’énergie ⚡"
+  },
+  {
+    "keys": ["chimie"],
+    "answer": "La chimie étudie les réactions entre les substances 🧪"
+  },
+  {
+    "keys": ["biologie"],
+    "answer": "La biologie étudie les êtres vivants 🧬"
+  },
+
+  // 💻 TECHNOLOGIE
+  {
+    "keys": ["internet"],
+    "answer": "Internet est un réseau mondial de communication 🌐"
+  },
+  {
+    "keys": ["ordinateur"],
+    "answer": "Un ordinateur est une machine qui traite des informations 💻"
+  },
+  {
+    "keys": ["telephone", "téléphone"],
+    "answer": "Un téléphone permet de communiquer à distance 📱"
+  },
+
+  // ⚽ SPORT
+  {
+    "keys": ["football", "foot"],
+    "answer": "Le football est le sport le plus populaire au monde ⚽"
+  },
+  {
+    "keys": ["basket"],
+    "answer": "Le basketball est un sport joué avec un ballon et un panier 🏀"
+  },
+
+  // 🧠 GENERAL
+  {
+    "keys": ["temps", "heure"],
+    "answer": "Le temps est une ressource précieuse ⏳"
+  },
+  {
+    "keys": ["aide", "help"],
+    "answer": "Bien sûr 👍 je suis là pour t’aider"
+  }
+]
